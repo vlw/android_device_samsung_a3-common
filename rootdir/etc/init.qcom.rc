@@ -29,8 +29,6 @@ import init.qcom.power.rc
 import init.qcom.usb.rc
 #import init.target.rc
 
-# TODO: split target specific parts in init.target.rc
-on early-init
     mount debugfs debugfs /sys/kernel/debug
 
     mkdir /efs 0771 system radio
