@@ -23,7 +23,7 @@
 # inherit from qcom-common
 -include device/samsung/qcom-common/BoardConfigCommon.mk
 
-LOCAL_PATH := device/samsung/a5-common
+LOCAL_PATH := device/samsung/a3-common
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8916
@@ -36,7 +36,7 @@ TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_CPU_VARIANT := cortex-a53
 TARGET_CPU_CORTEX_A53 := true
 
-TARGET_SPECIFIC_HEADER_PATH := device/samsung/a5-common/include
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/a3-common/include
 
 # Kernel
 TARGET_KERNEL_ARCH := arm
@@ -62,7 +62,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 12775813120
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/a5-common/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/a3-common/bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
