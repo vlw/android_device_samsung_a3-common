@@ -104,7 +104,7 @@ static bool needYUV420preview(android::CameraParameters &params) {
     int video_width, video_height;
     params.getPreviewSize(&video_width, &video_height);
     ALOGV("%s : PreviewSize is %x", __FUNCTION__, video_width*video_height);
-    return video_width*video_height <= 720*720;
+    return video_width*video_height <= 480*480;
 }
 
 #define KEY_VIDEO_HFR_VALUES "video-hfr-values"
