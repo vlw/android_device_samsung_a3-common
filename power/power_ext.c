@@ -21,7 +21,7 @@
 #define LOG_TAG "PowerHAL_A5_Ext"
 #include <utils/Log.h>
 
-/* touchscreen */
+/* Touchscreen */
 #define TS_CONTROL "/sys/class/sec/sec_touchscreen/ts_control"
 
 static void sysfs_write(char *path, char *s) {
