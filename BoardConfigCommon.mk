@@ -68,7 +68,7 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 
 # Custom RIL class
-BOARD_RIL_CLASS := ../../../device/samsung/a5-common/ril/
+BOARD_RIL_CLASS := ../../../device/samsung/a3-common/ril/
 USE_DEVICE_SPECIFIC_DATASERVICES := true
 
 # Fonts
@@ -125,7 +125,7 @@ TARGET_PROVIDES_CAMERA_HAL := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # CMHW
-BOARD_HARDWARE_CLASS += device/samsung/a5-common/cmhw
+BOARD_HARDWARE_CLASS += device/samsung/a3-common/cmhw
 
 # Workaround to avoid issues with legacy liblights on QCOM platforms
 TARGET_PROVIDES_LIBLIGHT := true
@@ -155,10 +155,10 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
-    device/samsung/a5-common/sepolicy
+    device/samsung/a3-common/sepolicy
 
 # Misc.
-TARGET_SYSTEM_PROP := device/samsung/a5-common/system.prop
+TARGET_SYSTEM_PROP := device/samsung/a3-common/system.prop
 
 # TWRP
 # Display
@@ -170,11 +170,11 @@ TW_NEW_ION_HEAP := true
 TW_TARGET_USES_QCOM_BSP := true
 
 # Keys
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/a5-common/recovery/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/a3-common/recovery/recovery_keys.c
 BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Storage
-TARGET_RECOVERY_FSTAB := device/samsung/a5-common/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := device/samsung/a3-common/rootdir/etc/fstab.qcom
 TW_INTERNAL_STORAGE_PATH := "/data/media"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
