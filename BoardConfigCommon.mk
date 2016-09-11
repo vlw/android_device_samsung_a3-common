@@ -41,10 +41,11 @@ TARGET_SPECIFIC_HEADER_PATH := device/samsung/a3-common/include
 # Kernel
 TARGET_KERNEL_ARCH := arm
 BOARD_DTBTOOL_ARG := -2
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=enforcing
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_RAMDISK_OFFSET := 0x02000000
-BOARD_KERNEL_TAGS_OFFSET := 0x01e00000
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_RAMDISK_OFFSET := 0x01000000
+BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/samsung/msm8916
@@ -136,7 +137,7 @@ TARGET_USES_QCOM_BSP := true
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 PROTOBUF_SUPPORTED := true
 HAVE_SYNAPTICS_I2C_RMI4_FW_UPGRADE := true
-COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
+#COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
 
 # Media
 TARGET_QCOM_MEDIA_VARIANT := caf
