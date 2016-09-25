@@ -15,10 +15,10 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Also get non-open-source specific aspects if available
-$(call inherit-product-if-exists, vendor/samsung/a5-common/a5-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/a3ltexx/a3-vendor.mk)
 
 # Common overlay
-DEVICE_PACKAGE_OVERLAYS += device/samsung/a5-common/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/a3-common/overlay
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -122,7 +122,10 @@ PRODUCT_PACKAGES += \
 # Misc. libs
 PRODUCT_PACKAGES += \
     libstlport \
-    libboringssl-compat
+    libboringssl-compat \
+	libssl \
+	libcrypto \
+	bssl
 
 # FM
 PRODUCT_PACKAGES += \
@@ -264,10 +267,15 @@ PRODUCT_COPY_FILES += \
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.ril_class=SamsungA5RIL
+    ro.telephony.ril_class=SamsungA3RIL
 
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
+
+#LIBS
+PRODUCT_PACKAGES += \
+    dhcpcd.conf \
+    hostapd \
 
 # Common qcom
 $(call inherit-product, device/samsung/qcom-common/qcom-common.mk)

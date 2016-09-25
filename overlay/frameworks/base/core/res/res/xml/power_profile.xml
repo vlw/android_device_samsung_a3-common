@@ -37,5 +37,5 @@
     </array>
     <item name="cpu.idle">1.6</item>
     <item name="cpu.idle">20</item>
-    <item name="battery.capacity">2300</item>
+    <item name="battery.capacity">1900</item>
 </device>
