@@ -17,4 +17,11 @@
 <resources>
     <bool name="call_recording_enabled">true</bool>
     <integer name="call_recording_audio_source">4</integer>
+
+    <!-- Flag indicating if dtmf tone type is enabled -->
+    <bool name="dtmf_type_enabled">true</bool>
+	
+	<!-- This device implements a noise suppression device for in call audio-->
+    <bool name="has_in_call_noise_suppression">true</bool>
+
 </resources>
