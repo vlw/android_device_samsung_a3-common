@@ -125,8 +125,7 @@ PRODUCT_PACKAGES += \
     libstlport \
     libboringssl-compat \
 	libssl \
-	libcrypto \
-	bssl
+	libcrypto
 
 # FM
 PRODUCT_PACKAGES += \
