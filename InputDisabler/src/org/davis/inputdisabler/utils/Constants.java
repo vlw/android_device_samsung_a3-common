@@ -8,9 +8,9 @@ public final class Constants {
 
     // Paths to input devices
 
-    public static final String TS_PATH = "/sys/class/input/input3/enabled";
+    public static final String TS_PATH = "/sys/class/input/input4/enabled";
 
-    public static final String TK_PATH = "/sys/class/input/input1/enabled";
+    public static final String TK_PATH = "/sys/class/input/input2/enabled";
 
     // Doze
 
