@@ -98,13 +98,13 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     Snap \
-    Camera2 \
     libmm-qcamera \
     camera.msm8916
 
 # GPS HAL
 PRODUCT_PACKAGES += \
-    gps.msm8916
+    gps.msm8916 \
+	FusedLocation
 
 # OMX
 PRODUCT_PACKAGES += \
