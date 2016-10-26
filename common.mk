@@ -48,10 +48,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     SamsungDoze
 
-# Touch issue workaround
-PRODUCT_PACKAGES += \
-    InputDisabler
-
 # Samsung libril shim library
 PRODUCT_PACKAGES += \
     libril_shim
