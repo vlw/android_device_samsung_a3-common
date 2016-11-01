@@ -749,15 +749,19 @@ public final class DisplayManagerService extends SystemService {
             if (diff == DisplayDeviceInfo.DIFF_STATE) {
                 Slog.i(TAG, "Display device changed state: \"" + info.name
                         + "\", " + Display.stateToString(info.state));
+			Slog.i(TAG, "Display device NEED changed");
+			if(info.state == Display.STATE_ON){
+				enableDevices(true);
+				Slog.i(TAG, "Display device changed to ON");
+			}
+			if (info.state == Display.STATE_OFF) {
+				Slog.i(TAG, "Display device changed to OFF");
+				enableDevices(false);
+			}
+
             } else if (diff != 0) {
                 Slog.i(TAG, "Display device changed: " + info);
             }
-			if(info.state == Display.STATE_ON){
-				enableDevices(true);
-			}
-			if (info.state == Display.STATE_OFF) {
-				enableDevices(false);
-			}
             device.mDebugLastLoggedDeviceInfo = info;
 
             device.applyPendingDisplayDeviceInfoChangesLocked();

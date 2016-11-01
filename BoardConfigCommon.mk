@@ -36,6 +36,8 @@ TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_CPU_VARIANT := cortex-a53
 TARGET_CPU_CORTEX_A53 := true
 
+TARGET_SKIP_DEFAULT_LOCALE := true
+
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/a3-common/include
 
 # Kernel
