@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 The CyanogenMod Project
+ * Copyright (c) 2014 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,12 @@
 #include <string.h>
 #include <fcntl.h>
 
-#define LOG_TAG "PowerHAL_A5_Ext"
+#define LOG_TAG "PowerHAL_A3_Ext"
 #include <utils/Log.h>
 
-/* Touchscreen */
-#define TS_CONTROL "/sys/class/sec/sec_touchscreen/ts_control"
+#define TOUCHKEY_POWER "/sys/class/input/input2/enabled"
+#define SPEN_POWER "/sys/class/input/input1/enabled"
+#define TSP_POWER "/sys/class/input/input4/enabled"
 
 static void sysfs_write(char *path, char *s) {
     char buf[80];
@@ -46,5 +47,9 @@ static void sysfs_write(char *path, char *s) {
 
 void cm_power_set_interactive_ext(int on) {
     ALOGD("%s: %s input devices", __func__, on ? "enabling" : "disabling");
-    sysfs_write(TS_CONTROL, on ? "1" : "0");
+    sysfs_write(TSP_POWER, on ? "1" : "0");
+    sysfs_write(TOUCHKEY_POWER, on ? "1" : "0");
+    sysfs_write(SPEN_POWER, on ? "1" : "0");
 }
+
+
