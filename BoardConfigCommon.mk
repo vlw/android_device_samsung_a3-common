@@ -177,6 +177,9 @@ TW_MAX_BRIGHTNESS := 255
 TW_NEW_ION_HEAP := true
 TW_TARGET_USES_QCOM_BSP := true
 
+#Use jemalloc for faster memory allocate
+MALLOC_IMPL := jemalloc
+
 # Keys
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/a3-common/recovery/recovery_keys.c
 BOARD_HAS_NO_SELECT_BUTTON := true
