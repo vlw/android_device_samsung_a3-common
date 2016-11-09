@@ -69,7 +69,8 @@ PRODUCT_PACKAGES += \
     tinyplay \
     tinycap \
     tinymix \
-    tinypcminfo
+    tinypcminfo \
+	libtinycompress
 
 # Display
 PRODUCT_PACKAGES += \
