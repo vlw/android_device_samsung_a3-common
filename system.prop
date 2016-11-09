@@ -1,6 +1,17 @@
 # RIL
 rild.libpath=/system/lib/libsec-ril.so
 rild.libargs=-d /dev/smd0
+persist.rild.nitz_plmn=
+persist.rild.nitz_long_ons_0=
+persist.rild.nitz_long_ons_1=
+persist.rild.nitz_long_ons_2=
+persist.rild.nitz_long_ons_3=
+persist.rild.nitz_short_ons_0=
+persist.rild.nitz_short_ons_1=
+persist.rild.nitz_short_ons_2=
+persist.rild.nitz_short_ons_3=
+persist.radio.rat_on=combine
+ril.subscription.types=NV,RUIM
 ro.telephony.default_network=9
 ro.product_ship=true
 ro.ril.transmitpower=true
@@ -18,7 +29,7 @@ ro.use_data_netmgrd=false
 persist.data.netmgrd.qos.enable=false
 
 # Display
-ro.sf.lcd_density=245
+ro.sf.lcd_density=240
 debug.composition.type=c2d
 debug.sf.gpu_comp_tiling=1
 debug.mdpcomp.idletime=600
