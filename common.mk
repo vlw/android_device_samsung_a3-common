@@ -95,8 +95,7 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     Snap \
-    libmm-qcamera \
-    camera.msm8916
+    libmm-qcamera
 
 # GPS HAL
 PRODUCT_PACKAGES += \
@@ -123,6 +122,10 @@ PRODUCT_PACKAGES += \
     libboringssl-compat \
 	libssl \
 	libcrypto
+
+# Gello
+PRODUCT_PACKAGES += \
+    Gello
 
 # FM
 PRODUCT_PACKAGES += \
@@ -173,7 +176,8 @@ PRODUCT_PACKAGES += \
 # Misc
 PRODUCT_PACKAGES += \
     libxml2 \
-    Stk
+    Stk \
+	Stk2
 
 # NFC packages
 PRODUCT_PACKAGES += \
