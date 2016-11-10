@@ -177,7 +177,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libxml2 \
     Stk \
-	Stk2
+    Stk2
 
 # NFC packages
 PRODUCT_PACKAGES += \
