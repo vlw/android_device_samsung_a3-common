@@ -58,6 +58,7 @@ BOARD_MKBOOTIMG_ARGS := --dt device/samsung/a3ltexx/dt.img --kernel_offset 0x000
 
 # Partition sizes
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS:= true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 13631488
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 15728640
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2516582400
@@ -170,13 +171,15 @@ TARGET_SYSTEM_PROP := device/samsung/a3-common/system.prop
 
 # TWRP
 # Display
+TW_THEME := portrait_hdpi
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TW_BRIGHTNESS_PATH := "/sys/devices/soc.0/1a00000.qcom\x2cmdss_mdp/qcom\x2cmdss_fb_primary.137/leds/lcd-backlight/brightness"
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
-TW_NEW_ION_HEAP := true
-TW_TARGET_USES_QCOM_BSP := true
+#TW_NEW_ION_HEAP := true
+#TW_TARGET_USES_QCOM_BSP := false
+#TW_TARGET_USES_QCOM_BSP := false
 
 #Use jemalloc for faster memory allocate
 #MALLOC_IMPL := jemalloc
@@ -191,7 +194,6 @@ TW_INTERNAL_STORAGE_PATH := "/data/media"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-#TW_NO_USB_STORAGE := true
 TW_MTP_DEVICE := /dev/mtp_usb
 RECOVERY_SDCARD_ON_DATA := true
 
@@ -202,6 +204,8 @@ TW_NO_REBOOT_BOOTLOADER := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TW_INCLUDE_CRYPTO := true
 HAVE_SELINUX := true
+TW_EXCLUDE_SUPERSU := true
+BOARD_SUPPRESS_SECURE_ERASE := true
 
 # Dex
 ifeq ($(HOST_OS),linux)
