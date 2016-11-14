@@ -500,7 +500,7 @@ public class FMRadioService extends Service
                 mIsFMDeviceLoopbackActive = true;
             }
         } else if (!enable && mIsFMDeviceLoopbackActive == true) {
-hy		   mAudioManager.setParameters("fm_mode=off");
+		   mAudioManager.setParameters("fm_mode=off");
 		   mAudioManager.setParameters("fm_radio_mute=1");
             AudioSystem.setDeviceConnectionState(AudioSystem.DEVICE_OUT_FM,
                                  AudioSystem.DEVICE_STATE_UNAVAILABLE, "", "");
