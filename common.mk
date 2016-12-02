@@ -278,6 +278,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd \
+	busybox
 
 # Common qcom
 $(call inherit-product, device/samsung/qcom-common/qcom-common.mk)
