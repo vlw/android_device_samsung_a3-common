@@ -54,7 +54,7 @@ BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/samsung/msm8916
-BOARD_MKBOOTIMG_ARGS := --dt device/samsung/a3ltexx/dt.img --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 
+#BOARD_MKBOOTIMG_ARGS := --dt device/samsung/a3ltexx/dt.img --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 
 
 # Partition sizes
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -174,7 +174,7 @@ TARGET_SYSTEM_PROP := device/samsung/a3-common/system.prop
 TW_THEME := portrait_hdpi
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
-TW_BRIGHTNESS_PATH := "/sys/devices/soc.0/1a00000.qcom\x2cmdss_mdp/qcom\x2cmdss_fb_primary.137/leds/lcd-backlight/brightness"
+#TW_BRIGHTNESS_PATH := "/sys/devices/soc.0/1a00000.qcom\x2cmdss_mdp/qcom\x2cmdss_fb_primary.137/leds/lcd-backlight/brightness"
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
 #TW_NEW_ION_HEAP := true
@@ -190,11 +190,12 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Storage
 TARGET_RECOVERY_FSTAB := device/samsung/a3-common/rootdir/etc/fstab.qcom
-TW_INTERNAL_STORAGE_PATH := "/data/media"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_INTERNAL_STORAGE_PATH := "/data/media/0"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "sdcard"
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_MTP_DEVICE := /dev/mtp_usb
+BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
 RECOVERY_SDCARD_ON_DATA := true
 
 # Misc.
@@ -204,6 +205,7 @@ TW_NO_REBOOT_BOOTLOADER := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TW_INCLUDE_CRYPTO := true
 HAVE_SELINUX := true
+TWHAVE_SELINUX := true
 TW_EXCLUDE_SUPERSU := true
 BOARD_SUPPRESS_SECURE_ERASE := true
 
