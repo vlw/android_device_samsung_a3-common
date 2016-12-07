@@ -103,6 +103,7 @@ const char CameraParameters::EFFECT_NEON[] = "neon"; \
 const char CameraParameters::SCENE_MODE_FLOWERS[] = "flowers"; \
 const char CameraParameters::SCENE_MODE_AR[] = "AR"; \
 const char CameraParameters::PIXEL_FORMAT_YUV420SP_ADRENO[] = "yuv420sp-adreno"; \
+const char CameraParameters::PIXEL_FORMAT_YUV420SP_NV21E[] = "yuv420sp-nv21e"; \
 const char CameraParameters::PIXEL_FORMAT_RAW[] = "raw"; \
 const char CameraParameters::PIXEL_FORMAT_YV12[] = "yuv420p"; \
 const char CameraParameters::PIXEL_FORMAT_NV12[] = "nv12"; \
@@ -115,13 +116,13 @@ const char CameraParameters::EFFECT_VINTAGE_WARM[] = "vintage-warm"; \
 const char CameraParameters::EFFECT_WASHED[] = "washed"; \
 const char CameraParameters::SCENE_MODE_BACKLIGHT[] = "backlight"; \
 const char CameraParameters::SCENE_MODE_ASD[] = "asd"; \
+int CameraParameters::getInt64(const char *key) const { return -1; }; \
 const char *CameraParameters::getPreviewFrameRateMode() const { return get(KEY_PREVIEW_FRAME_RATE_MODE); }; \
-void CameraParameters::setPreviewFrameRateMode(const char *mode) { set(KEY_PREVIEW_FRAME_RATE_MODE, mode); };
-/*void CameraParameters::getMeteringAreaCenter(int *x, int *y) const { }; \
+void CameraParameters::setPreviewFrameRateMode(const char *mode) { set(KEY_PREVIEW_FRAME_RATE_MODE, mode); }; \
+void CameraParameters::getMeteringAreaCenter(int *x, int *y) const { }; \
 void CameraParameters::setTouchIndexAec(int x, int y) { }; \
 void CameraParameters::setTouchIndexAf(int x, int y) { }; \
-int CameraParameters::getInt64(const char *key) const { return -1; }; \
-void CameraParameters::setPreviewFpsRange(int minFPS, int maxFPS) { };*/
+void CameraParameters::setPreviewFpsRange(int minFPS, int maxFPS) { };
 
 #define CAMERA_PARAMETERS_EXTRA_H \
     static const char KEY_SUPPORTED_ISO_MODES[]; \
@@ -212,6 +213,7 @@ void CameraParameters::setPreviewFpsRange(int minFPS, int maxFPS) { };*/
     static const char SCENE_MODE_FLOWERS[]; \
     static const char SCENE_MODE_AR[]; \
     static const char PIXEL_FORMAT_YUV420SP_ADRENO[]; \
+    static const char PIXEL_FORMAT_YUV420SP_NV21E[]; \
     static const char PIXEL_FORMAT_RAW[]; \
     static const char PIXEL_FORMAT_YV12[]; \
     static const char PIXEL_FORMAT_NV12[]; \
