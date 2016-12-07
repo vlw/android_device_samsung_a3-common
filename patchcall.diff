@@ -1,0 +1,19 @@
+diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioManager.java b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioManager.java
+--- a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioManager.java	Wed Apr 20 08:50:20 2016
++++ b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioManager.java	Thu May 12 01:31:40 2016
+@@ -137,6 +137,15 @@ final class CallAudioManager extends CallsManagerListenerBase
+ 
+                     Log.v(this, "Request to change audio mode from %s to %s", modeToString(oldMode),
+                             modeToString(newMode));
++                            
++                            
++                    if(newMode == 0) {
++                        mAudioManager.setParameters("TFA_SETVOLUME=0");
++                        mAudioManager.setParameters("realcall=off");
++                    } else if(newMode == AudioManager.MODE_IN_COMMUNICATION || newMode == AudioManager.MODE_RINGTONE
++                                || newMode == AudioManager.MODE_IN_CALL) {
++                        mAudioManager.setParameters("realcall=on");
++                    }
+ 
+                     if (oldMode != newMode) {
+                         if (oldMode == AudioManager.MODE_IN_CALL &&
