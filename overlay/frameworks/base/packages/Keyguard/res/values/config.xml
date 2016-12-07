@@ -24,6 +24,6 @@
     <integer name="config_chargingSlowlyThreshold">800</integer>
 
     <!-- Threshold in micro amperes above which a charger is rated as "fast" -->
-    <integer name="config_chargingFastThreshold">900000</integer>
+    <integer name="config_chargingFastThreshold">1600</integer>
 
 </resources>
