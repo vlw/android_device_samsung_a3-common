@@ -715,13 +715,13 @@
 
     <path name="speaker">
         <path name="spk" />
-        <ctl name="RX3 Digital Volume" value="79" />
+        <ctl name="RX3 Digital Volume" value="80" />
     </path>
 
     <path name="headset">
         <path name="ear" />
-        <ctl name="RX1 Digital Volume" value="79" />
-        <ctl name="RX2 Digital Volume" value="79" />
+        <ctl name="RX1 Digital Volume" value="84" />
+        <ctl name="RX2 Digital Volume" value="84" />
     </path>
 
     <path name="dock">
@@ -733,8 +733,8 @@
 
     <path name="headphones">
         <path name="ear" />
-        <ctl name="RX1 Digital Volume" value="80" />
-        <ctl name="RX2 Digital Volume" value="80" />
+        <ctl name="RX1 Digital Volume" value="83" />
+        <ctl name="RX2 Digital Volume" value="83" />
         <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
