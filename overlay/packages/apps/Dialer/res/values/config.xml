@@ -16,7 +16,7 @@
 -->
 <resources>
     <bool name="call_recording_enabled">true</bool>
-    <integer name="call_recording_audio_source">4</integer>
+    <integer name="call_recording_audio_source">0</integer>
 
     <!-- Flag indicating if dtmf tone type is enabled -->
     <bool name="dtmf_type_enabled">true</bool>
