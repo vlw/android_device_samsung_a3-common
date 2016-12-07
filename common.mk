@@ -101,7 +101,10 @@ PRODUCT_PACKAGES += \
 # GPS HAL
 PRODUCT_PACKAGES += \
     gps.msm8916 \
-	FusedLocationD
+    libloc_core \
+    libloc_eng \
+    libgps.utils \
+    FusedLocation
 
 # OMX
 PRODUCT_PACKAGES += \

@@ -136,6 +136,10 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 # CMHW
 BOARD_HARDWARE_CLASS += device/samsung/a3-common/cmhw
 
+# GPS
+TARGET_GPS_HAL_PATH := device/samsung/a3-common/gps
+BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
+
 # Workaround to avoid issues with legacy liblights on QCOM platforms
 TARGET_PROVIDES_LIBLIGHT := true
 
