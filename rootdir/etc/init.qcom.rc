@@ -371,6 +371,9 @@ on boot
     chmod 0755 /efs/bluetooth/bt_addr
     restorecon_recursive /efs/bluetooth
 
+    # Start qcamerasvr
+    start qcamerasvr
+
 # msm specific files that need to be created on /data
 on post-fs-data
 
