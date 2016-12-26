@@ -150,7 +150,8 @@ PRODUCT_PACKAGES += \
     init.qcom.power.rc \
     init.qcom.usb.rc \
     init.recovery.qcom.rc \
-    ueventd.qcom.rc
+    ueventd.qcom.rc \
+    sbin.sswap
 
 # Filesystem
 PRODUCT_PACKAGES += \
