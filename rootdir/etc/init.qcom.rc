@@ -83,6 +83,10 @@ on early-boot
     setprop qcom.audio.init complete
 
 on boot
+
+	# SSWAP
+    write /proc/sys/vm/swappiness 130
+
     # Bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -376,6 +380,9 @@ on boot
 
 # msm specific files that need to be created on /data
 on post-fs-data
+
+    # SSWAP
+    write /proc/sys/vm/swappiness 130
 
     mkdir /data/misc/camera 0770 camera camera
 
@@ -810,3 +817,10 @@ service ril-daemon1 /system/bin/rild -l /system/lib/libsec-ril-dsds.so -c 2
     user root
     disabled
     group radio cache inet misc audio log qcom_diag system drmrpc sdcard_r sdcard_rw shell
+
+# SSWAP
+service swapon /sbin/sswap -s
+    class core
+    user root
+    group root
+    oneshot
