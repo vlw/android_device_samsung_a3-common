@@ -273,7 +273,7 @@ public class SamsungA3RIL extends RIL implements CommandsInterface {
 
     @Override
     protected RILRequest
-    processSolicited (Parcel p) {
+    processSolicited (Parcel p, int type) {
         int serial, error;
         boolean found = false;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
@@ -309,7 +309,7 @@ public class SamsungA3RIL extends RIL implements CommandsInterface {
             p.setDataPosition(dataPosition);
 
             // Forward responses that we are not overriding to the super class
-            return super.processSolicited(p);
+            return super.processSolicited(p, type);
         }
 
 
@@ -363,7 +363,7 @@ public class SamsungA3RIL extends RIL implements CommandsInterface {
 
     @Override
     protected void
-    processUnsolicited (Parcel p) {
+    processUnsolicited (Parcel p, int type) {
         Object ret = null;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         int response = p.readInt();
@@ -417,7 +417,7 @@ public class SamsungA3RIL extends RIL implements CommandsInterface {
 		              p.writeInt(newResponse);
 		        }
 			    p.setDataPosition(dataPosition);
-				super.processUnsolicited(p);
+				super.processUnsolicited(p, type);
 				return;
 		}
     }
