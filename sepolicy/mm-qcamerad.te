@@ -1,5 +1,7 @@
-allow mm-qcamerad sysfs_camera:dir search;
-allow mm-qcamerad sysfs_camera:file rw_file_perms;
-allow mm-qcamerad system_data_file:dir w_dir_perms;
-allow mm-qcamerad system_file:file execmod; # for libmmcamera_faceproc
-type_transition mm-qcamerad system_data_file:sock_file camera_socket "cam_socket3";
+# Nick Kralevich <nnk@google.com> : Allow loading files with text relocations from /system
+
+# Adapted from shamu
+allow mm-qcamerad system_data_file:sock_file unlink;
+allow mm-qcamerad sensors_socket:sock_file read;
+
+allow mm-qcamerad system_data_file:dir { write remove_name add_name };
