@@ -98,6 +98,14 @@ PRODUCT_PACKAGES += \
     libmm-qcamera \
     camera.msm8916
 
+# Properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.tn.disable=1 \
+    persist.camera.pip.support=0 \
+    persist.camera.hal.debug.mask=0 \
+    media.stagefright.legacyencoder=true \
+    media.stagefright.less-secure=true
+
 # GPS HAL
 PRODUCT_PACKAGES += \
     gps.msm8916
