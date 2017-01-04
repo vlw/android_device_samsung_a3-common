@@ -74,6 +74,19 @@ $(KEYMASTER_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(KEYMASTER_SYMLINKS)
 
+# Kiwi
+KIWI_IMAGES := \
+    kiwi.b00 kiwi.b01 kiwi.b02 kiwi.b03 kiwi.mdt
+
+KIWI_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/firmware/,$(notdir $(KIWI_IMAGES)))
+$(KIWI_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "KIWI firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(KIWI_SYMLINKS)
+
 # Modem
 MODEM_IMAGES := \
     modem.b00 modem.b01 modem.b02 modem.b03 modem.b04 modem.b05 modem.b06 modem.b07 modem.b08 modem.b09 \
