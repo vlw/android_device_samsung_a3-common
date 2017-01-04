@@ -129,6 +129,19 @@ $(MODEM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(MODEM_SYMLINKS)
 
+# Playready
+PLAYREADY_IMAGES := \
+    playread.b00 playread.b01 playread.b02 playread.b03 playread.mdt
+
+PLAYREADY_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(PLAYREADY_IMAGES)))
+$(PLAYREADY_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Playready firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(PLAYREADY_SYMLINKS)
+
 # Prov
 PROV_IMAGES := \
     prov.b00 prov.b01 prov.b02 prov.b03 prov.mdt \
@@ -206,19 +219,6 @@ $(TBASE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(TBASE_SYMLINKS)
-
-# Playready
-PLAYREADY_IMAGES := \
-    playread.b00 playread.b01 playread.b02 playread.b03 playread.mdt
-
-PLAYREADY_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(PLAYREADY_IMAGES)))
-$(PLAYREADY_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "Playready firmware link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /firmware/image/$(notdir $@) $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(PLAYREADY_SYMLINKS)
 
 # TZ
 TZ_IMAGES := \
