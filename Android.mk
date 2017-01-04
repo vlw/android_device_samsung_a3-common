@@ -87,6 +87,19 @@ $(KIWI_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(KIWI_SYMLINKS)
 
+# MCpay
+MCPAY_IMAGES := \
+    mcpay.b00 mcpay.b01 mcpay.b02 mcpay.b03 mcpay.mdt
+
+MCPAY_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/firmware/,$(notdir $(MCPAY_IMAGES)))
+$(MCPAY_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "MCPAY firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(MCPAY_SYMLINKS)
+
 # Modem
 MODEM_IMAGES := \
     modem.b00 modem.b01 modem.b02 modem.b03 modem.b04 modem.b05 modem.b06 modem.b07 modem.b08 modem.b09 \
