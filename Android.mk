@@ -79,7 +79,7 @@ ALL_DEFAULT_INSTALLED_MODULES += $(MODEM_SYMLINKS)
 
 # Prov
 PROV_IMAGES := \
-    prov.b00 prov.b01 prov.b02 prov.b03 prov.mtd \
+    prov.b00 prov.b01 prov.b02 prov.b03 prov.mdt \
 
 PROV_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(PROV_IMAGES)))
 $(PROV_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
