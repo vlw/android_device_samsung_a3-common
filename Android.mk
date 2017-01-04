@@ -239,4 +239,9 @@ $(shell mkdir -p $(TARGET_OUT_ETC)/firmware/wlan/prima; \
     ln -sf /data/misc/wifi/WCNSS_qcom_cfg.ini \
     $(TARGET_OUT_ETC)/firmware/wlan/prima/WCNSS_qcom_cfg.ini)
 
+$(shell mkdir -p $(PRODUCT_OUT)/system/vendor/lib/egl \
+    && pushd $(PRODUCT_OUT)/system/vendor/lib > /dev/null \
+    && ln -s egl/libEGL_adreno.so libEGL_adreno.so \
+    && popd > /dev/null)
+
 endif
