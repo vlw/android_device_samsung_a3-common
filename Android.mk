@@ -100,6 +100,19 @@ $(MCPAY_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(MCPAY_SYMLINKS)
 
+# MLDAP
+MLDAP_IMAGES := \
+    mldap.b00 mldap.b01 mldap.b02 mldap.b03 mldap.mdt
+
+MLDAP_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/firmware/,$(notdir $(MLDAP_IMAGES)))
+$(MLDAP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "MLDAP firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(MLDAP_SYMLINKS)
+
 # Modem
 MODEM_IMAGES := \
     modem.b00 modem.b01 modem.b02 modem.b03 modem.b04 modem.b05 modem.b06 modem.b07 modem.b08 modem.b09 \
