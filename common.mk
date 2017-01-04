@@ -159,7 +159,7 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.recovery.qcom.rc \
     ueventd.qcom.rc \
-    sbin.sswap
+    sswap
 
 # Filesystem
 PRODUCT_PACKAGES += \

@@ -61,9 +61,9 @@ LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE       := sbin.sswap
+LOCAL_MODULE       := sswap
 LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := etc/sbin/sswap
-LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)/sbin/
+LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)/sbin
 include $(BUILD_PREBUILT)
