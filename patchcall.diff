@@ -1,7 +1,12 @@
 diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java
 --- a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java	Wed Apr 20 08:50:20 2016
 +++ b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java	Thu May 12 01:31:40 2016
-@@ -20,6 +20,7 @@ import android.media.AudioManager;
+@@ -16,10 +16,12 @@
+ 
+ package com.android.server.telecom;
+ 
++import android.content.Context;
+ import android.media.AudioManager;
  import android.os.Message;
  import android.os.SystemProperties;
  import android.telecom.PhoneAccountHandle;
@@ -9,17 +14,7 @@ diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioMo
  import android.telephony.SubscriptionManager;
  import android.util.SparseArray;
  
-@@ -28,6 +29,9 @@ import com.android.internal.util.State;
- import com.android.internal.util.StateMachine;
- 
- public class CallAudioModeStateMachine extends StateMachine {
-+
-+    private SubscriptionManager mSubscriptionManager;
-+
-     public static class MessageArgs {
-         public boolean hasActiveOrDialingCalls;
-         public boolean hasRingingCalls;
-@@ -153,7 +157,7 @@ public class CallAudioModeStateMachine extends StateMachine {
+@@ -153,7 +155,7 @@ public class CallAudioModeStateMachine extends StateMachine {
                  Log.i(LOG_TAG, "Abandoning audio focus: now UNFOCUSED");
                  mAudioManager.abandonAudioFocusForCall();
                  mAudioManager.setMode(AudioManager.MODE_NORMAL);
@@ -28,7 +23,7 @@ diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioMo
                  mMostRecentMode = AudioManager.MODE_NORMAL;
                  mCallAudioManager.setCallAudioRouteFocusState(CallAudioRouteStateMachine.NO_FOCUS);
              }
-@@ -305,6 +309,7 @@ public class CallAudioModeStateMachine extends StateMachine {
+@@ -305,6 +307,7 @@ public class CallAudioModeStateMachine extends StateMachine {
                  } else if (phoneId == 1) {
                      mAudioManager.setParameters("phone_type=cp2");
                  }
@@ -36,33 +31,29 @@ diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioMo
              }
  
              mAudioManager.setMode(AudioManager.MODE_IN_CALL);
-@@ -364,15 +369,25 @@ public class CallAudioModeStateMachine extends StateMachine {
- 
+@@ -365,14 +368,22 @@ public class CallAudioModeStateMachine extends StateMachine {
          private int getPhoneId(Call call) {
              if (call.getTargetPhoneAccount() != null) {
--                PhoneAccountHandle account = call.getTargetPhoneAccount();
+                 PhoneAccountHandle account = call.getTargetPhoneAccount();
++                int phoneId = -1;
++                Context  mContext = call.getContext();
++                SubscriptionInfo mSubscriptionInfo;
++                String subId = account.getId();
                  try {
 -                    int index = Integer.parseInt(account.getId());
 -                    int phoneId = SubscriptionManager.getPhoneId(index);
-+                    int phoneId = 0;
-+                    final SubscriptionInfo SimInfo1 = mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(0);
-+                    final SubscriptionInfo SimInfo2 = mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(1);
-+                    long ID1 = Long.valueOf(SimInfo1.getSubscriptionId());
-+                    long ID2 = Long.valueOf(SimInfo2.getSubscriptionId());
-+                    long phone = Long.valueOf(call.getTargetPhoneAccount().getId());
-+                    if(ID1 == phone){
-+                       phoneId = 0;
-+                       Log.i(LOG_TAG, "SIM CALL state phoneId = 0");
-+                    }else if(ID2 == phone){
-+                       phoneId = 1;
-+                       Log.i(LOG_TAG, "SIM CALL state phoneId = 1");
++                    for (int i = SubscriptionManager.from(mContext).getAllSubscriptionInfoCount()-1; i >= 0; i--){
++                        mSubscriptionInfo = SubscriptionManager.from(mContext).getActiveSubscriptionInfoForSimSlotIndex(i);
++                        if (subId.contains(mSubscriptionInfo.getIccId()))
++                            phoneId = i;
 +                    }
++                    Log.i(LOG_TAG, "phoneId = " + phoneId);
                      if (SubscriptionManager.isValidPhoneId(phoneId)) {
                          return phoneId;
                      }
                  } catch (NumberFormatException e) {
 -                    Log.e(LOG_TAG, e, "Cannot get phoneId from ID value " + account.getId());
-+                    Log.e(LOG_TAG, e, "Cannot get phoneId from ID value " + call.getTargetPhoneAccount().getId());
++                    Log.e(LOG_TAG, e, "Cannot get phoneId from ID value " + phoneId);
                  }
              }
              return -1;
