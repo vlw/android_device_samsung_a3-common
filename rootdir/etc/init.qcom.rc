@@ -786,6 +786,7 @@ service perfd /system/bin/perfd
    user root
    group root
    disabled
+   writepid /dev/cpuset/system-background/tasks
 
 service thermal-engine /system/bin/thermal-engine
    class core
