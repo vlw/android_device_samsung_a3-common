@@ -1,7 +1,25 @@
 diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java
 --- a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java	Wed Apr 20 08:50:20 2016
 +++ b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java	Thu May 12 01:31:40 2016
-@@ -153,7 +153,7 @@
+@@ -20,6 +20,7 @@ import android.media.AudioManager;
+ import android.os.Message;
+ import android.os.SystemProperties;
+ import android.telecom.PhoneAccountHandle;
++import android.telephony.SubscriptionInfo;
+ import android.telephony.SubscriptionManager;
+ import android.util.SparseArray;
+ 
+@@ -28,6 +29,9 @@ import com.android.internal.util.State;
+ import com.android.internal.util.StateMachine;
+ 
+ public class CallAudioModeStateMachine extends StateMachine {
++
++    private SubscriptionManager mSubscriptionManager;
++
+     public static class MessageArgs {
+         public boolean hasActiveOrDialingCalls;
+         public boolean hasRingingCalls;
+@@ -153,7 +157,7 @@ public class CallAudioModeStateMachine extends StateMachine {
                  Log.i(LOG_TAG, "Abandoning audio focus: now UNFOCUSED");
                  mAudioManager.abandonAudioFocusForCall();
                  mAudioManager.setMode(AudioManager.MODE_NORMAL);
@@ -10,7 +28,7 @@ diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioMo
                  mMostRecentMode = AudioManager.MODE_NORMAL;
                  mCallAudioManager.setCallAudioRouteFocusState(CallAudioRouteStateMachine.NO_FOCUS);
              }
-@@ -305,6 +305,7 @@
+@@ -305,6 +309,7 @@ public class CallAudioModeStateMachine extends StateMachine {
                  } else if (phoneId == 1) {
                      mAudioManager.setParameters("phone_type=cp2");
                  }
@@ -18,7 +36,7 @@ diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioMo
              }
  
              mAudioManager.setMode(AudioManager.MODE_IN_CALL);
-@@ -364,15 +365,25 @@
+@@ -364,15 +369,25 @@ public class CallAudioModeStateMachine extends StateMachine {
  
          private int getPhoneId(Call call) {
              if (call.getTargetPhoneAccount() != null) {
@@ -27,10 +45,10 @@ diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioMo
 -                    int index = Integer.parseInt(account.getId());
 -                    int phoneId = SubscriptionManager.getPhoneId(index);
 +                    int phoneId = 0;
-+                    SubscriptionInfo SimInfo1 = SubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(0);
-+                    SubscriptionInfo SimInfo2 = SubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(1);
-+                    long ID1 = Long.valueOf(SimInfo1.getSubscriptionId);
-+                    long ID2 = Long.valueOf(SimInfo2.getSubscriptionId);
++                    final SubscriptionInfo SimInfo1 = mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(0);
++                    final SubscriptionInfo SimInfo2 = mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(1);
++                    long ID1 = Long.valueOf(SimInfo1.getSubscriptionId());
++                    long ID2 = Long.valueOf(SimInfo2.getSubscriptionId());
 +                    long phone = Long.valueOf(call.getTargetPhoneAccount().getId());
 +                    if(ID1 == phone){
 +                       phoneId = 0;
