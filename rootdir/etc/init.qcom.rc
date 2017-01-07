@@ -54,7 +54,6 @@ on init
     symlink /system/vendor/lib/egl /egl
 
     # Support legacy paths
-    symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
 on fs
