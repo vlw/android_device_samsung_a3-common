@@ -1,0 +1,1 @@
+TARGET_QCOM_NO_FM_FIRMWARE := true
