@@ -780,14 +780,14 @@ service qseecomd /system/bin/qseecomd
    user root
    group root
 
-service perfd /system/bin/perfd
+service perfd /vendor/bin/perfd
    class main
    user root
-   group root
+   group root readproc
    disabled
    writepid /dev/cpuset/system-background/tasks
 
-service thermal-engine /system/bin/thermal-engine
+service thermal-engine /vendor/bin/thermal-engine
    class core
    seclabel u:r:thermal-engine:s0
    user root
