@@ -1,19 +1,6 @@
 diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java
 --- a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java	Wed Apr 20 08:50:20 2016
 +++ b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java	Thu May 12 01:31:40 2016
-@@ -16,10 +16,12 @@
- 
- package com.android.server.telecom;
- 
-+import android.content.Context;
- import android.media.AudioManager;
- import android.os.Message;
- import android.os.SystemProperties;
- import android.telecom.PhoneAccountHandle;
-+import android.telephony.SubscriptionInfo;
- import android.telephony.SubscriptionManager;
- import android.util.SparseArray;
- 
 @@ -153,7 +155,7 @@ public class CallAudioModeStateMachine extends StateMachine {
                  Log.i(LOG_TAG, "Abandoning audio focus: now UNFOCUSED");
                  mAudioManager.abandonAudioFocusForCall();
@@ -31,29 +18,3 @@ diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioMo
              }
  
              mAudioManager.setMode(AudioManager.MODE_IN_CALL);
-@@ -365,14 +368,22 @@ public class CallAudioModeStateMachine extends StateMachine {
-         private int getPhoneId(Call call) {
-             if (call.getTargetPhoneAccount() != null) {
-                 PhoneAccountHandle account = call.getTargetPhoneAccount();
-+                int phoneId = -1;
-+                Context  mContext = call.getContext();
-+                SubscriptionInfo mSubscriptionInfo;
-+                String subId = account.getId();
-                 try {
--                    int index = Integer.parseInt(account.getId());
--                    int phoneId = SubscriptionManager.getPhoneId(index);
-+                    for (int i = SubscriptionManager.from(mContext).getAllSubscriptionInfoCount()-1; i >= 0; i--){
-+                        mSubscriptionInfo = SubscriptionManager.from(mContext).getActiveSubscriptionInfoForSimSlotIndex(i);
-+                        if (subId.contains(mSubscriptionInfo.getIccId()))
-+                            phoneId = i;
-+                    }
-+                    Log.i(LOG_TAG, "phoneId = " + phoneId);
-                     if (SubscriptionManager.isValidPhoneId(phoneId)) {
-                         return phoneId;
-                     }
-                 } catch (NumberFormatException e) {
--                    Log.e(LOG_TAG, e, "Cannot get phoneId from ID value " + account.getId());
-+                    Log.e(LOG_TAG, e, "Cannot get phoneId from ID value " + phoneId);
-                 }
-             }
-             return -1;
