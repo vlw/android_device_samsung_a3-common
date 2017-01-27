@@ -45,7 +45,9 @@ on early-init
 on init
     # Preload the BoringSSL wrapper
     export LD_PRELOAD "/system/lib/libboringssl-compat.so"
-    export LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so:/system/lib/libcrypto.so|libboringssl-compat.so
+    export LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so:/system/lib/libcrypto.so|libboringssl-compat.so:/system/vendor/lib/lib-imsvt.so|libshims_ims.so
+
+    
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -829,6 +831,39 @@ service ril-daemon1 /system/bin/rild -l /system/lib/libsec-ril-dsds.so -c 2
     user root
     disabled
     group radio cache inet misc audio log qcom_diag system drmrpc sdcard_r sdcard_rw shell
+
+service imsqmidaemon /system/bin/imsqmidaemon
+    class main
+    user system
+    socket ims_qmid stream 0660 system radio
+    group radio net_raw log qcom_diag
+
+service imsdatadaemon /system/bin/imsdatadaemon
+    class main
+    user system
+    socket ims_datad stream 0660 system radio
+    group system wifi radio inet net_raw log qcom_diag net_admin
+    disabled
+
+on property:sys.ims.QMI_DAEMON_STATUS=1
+    start imsdatadaemon
+
+service ims_rtp_daemon /system/bin/ims_rtp_daemon
+   class main
+   user system
+   socket ims_rtpd stream 0660 system radio
+   group radio net_raw diag qcom_diag log
+   disabled
+
+service imscmservice /system/bin/imscmservice
+   class main
+   user system
+   group radio net_raw diag qcom_diag log
+   disabled
+
+on property:sys.ims.DATA_DAEMON_STATUS=1
+    start ims_rtp_daemon
+    start imscmservice
 
 # SSWAP
 service swapon /sbin/sswap -s
