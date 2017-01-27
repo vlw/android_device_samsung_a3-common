@@ -8,3 +8,6 @@ EXTENDED_FONT_FOOTPRINT := true
 
 # Touchscreen
 TARGET_TAP_TO_WAKE_NODE := "/sys/class/sec/sec_touchscreen/wake_gesture"
+
+#SU
+WITH_SU := true
