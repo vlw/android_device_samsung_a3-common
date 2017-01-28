@@ -3,7 +3,8 @@ PRODUCT_PACKAGES += \
     libxml2 \
     Stk \
     Stk2 \
-    busybox
+    busybox \
+    su
 
 # Misc.
 PRODUCT_PROPERTY_OVERRIDES += \
