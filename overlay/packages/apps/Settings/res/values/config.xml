@@ -24,5 +24,8 @@
     <bool name="config_show_volumeRockerWake">true</bool>
 
     <!-- Allow change color mode -->
-    <bool name="config_enableColorTemperature">false</bool>
+    <bool name="config_enableColorTemperature">true</bool>
+
+    <!-- VoLTE support -->
+    <bool name="config_voice_over_lte_enabled">true</bool>
 </resources>
