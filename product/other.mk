@@ -1,6 +1,5 @@
 # Misc
 PRODUCT_PACKAGES += \
-    libxml2 \
     Stk \
     Stk2 \
     busybox \
