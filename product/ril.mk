@@ -32,3 +32,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     libril_shim
 
+# Samsung rild
+PRODUCT_PACKAGES += \
+    rild
