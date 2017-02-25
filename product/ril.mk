@@ -20,7 +20,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     telephony.lteOnGsmDevice=1 \
     ro.ril.telephony.mqanelements=6 \
     ro.telephony.ril.config=simactivation \
-    ro.telephony.ril_class=SamsungQcom3GDSRIL
+    ro.telephony.ril_class=SamsungQcom3GDSRIL \
+    ro.telephony.samsung.realcall=true
 
 
 # Netmgrd
