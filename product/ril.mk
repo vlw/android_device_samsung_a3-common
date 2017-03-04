@@ -15,7 +15,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath2=/system/lib/libsec-ril-dsds.so \
     persist.radio.lte_vrte_ltd=1 \
     persist.radio.add_power_save=1 \
-    telephony.lteOnCdmaDevice=0
+    telephony.lteOnCdmaDevice=0 \
+    ro.telephony.ril_class=SamsungA3RIL
 
 
 # Netmgrd
