@@ -31,8 +31,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.dpm.feature=0
 
 # Samsung libril shim library
-#PRODUCT_PACKAGES += \
-#    libril_shim
+PRODUCT_PACKAGES += \
+    libril_shim
 
 # Samsung rild
 #PRODUCT_PACKAGES += \
