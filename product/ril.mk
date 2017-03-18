@@ -5,15 +5,21 @@ PRODUCT_COPY_FILES += \
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libargs=-d /dev/smd0 \
+    rild.libpath=/system/lib/libsec-ril.so \
+    rild.libpath2=/system/lib/libsec-ril-dsds.so \
     ro.telephony.default_network=9 \
+    keyguard.no_require_sim=true \
+    persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.rat_on=combine \
     ril.subscription.types=NV,RUIM \
     DEVICE_PROVISIONED=1 \
+    persist.radio.lte_vrte_ltd=1 \
+    persist.radio.add_power_save=1 \
     persist.radio.override_psvoice=true \
     ro.telephony.samsung.realcall=true \
-    keyguard.no_require_sim=true \
-    ro.telephony.ril_class=SamsungA3RIL
+    ro.telephony.ril_class=SamsungA3RIL \
+    telephony.lteOnCdmaDevice=0 \
+    ro.telephony.ril_class=SamsungA3RILv2
 
 # Netmgrd
 PRODUCT_PROPERTY_OVERRIDES += \
