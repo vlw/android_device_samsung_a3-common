@@ -17,9 +17,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.add_power_save=1 \
     persist.radio.override_psvoice=true \
     ro.telephony.samsung.realcall=true \
-    ro.telephony.ril_class=SamsungA3RIL \
     telephony.lteOnCdmaDevice=0 \
-    ro.telephony.ril_class=SamsungA3RILv2
+    ro.telephony.ril_class=SerranoRIL
 
 # Netmgrd
 PRODUCT_PROPERTY_OVERRIDES += \
