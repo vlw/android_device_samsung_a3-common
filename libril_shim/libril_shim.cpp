@@ -16,16 +16,16 @@
 
 #include <dlfcn.h>
 #include <sys/types.h>
-
+/*
 void RIL_register_socket(void *Init, int socketType, int argc, char **argv)  {
 }
-
+*/
 /* status_t Parcel::writeString16 */
 extern "C" int _ZN7android6Parcel13writeString16EPKDsj();
 extern "C" int _ZN7android6Parcel13writeString16EPKtj() {
     return _ZN7android6Parcel13writeString16EPKDsj();
 }
-
+/*
 extern "C" int strncmp(const char *s1, const char *s2, size_t n) {
     typedef int (*libc_strncmp_t)(const char *, const char *, size_t);
     static libc_strncmp_t libc_strncmp = (libc_strncmp_t)
@@ -36,3 +36,4 @@ extern "C" int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 extern "C" void RIL_onRequestAck() {}
+*/
