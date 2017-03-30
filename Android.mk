@@ -63,14 +63,14 @@ ALL_DEFAULT_INSTALLED_MODULES += $(ISDB_SYMLINKS)
 
 # Keymaster
 KEYMASTER_IMAGES := \
-    keymaste.b00 keymaste.b01 keymaste.b02 keymaste.b03 keymaste.mdt
+    keymaster.b00 keymaster.b01 keymaster.b02 keymaster.b03 keymaster.mdt
 
-KEYMASTER_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/system/vendor/firmware/keymaster/,$(notdir $(KEYMASTER_IMAGES)))
+KEYMASTER_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/firmware/keymaster/,$(notdir $(KEYMASTER_IMAGES)))
 $(KEYMASTER_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "KEYMASTER firmware link: $@"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
-	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+	$(hide) ln -sf /firmware/image/keymaste$(suffix $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(KEYMASTER_SYMLINKS)
 
@@ -304,10 +304,5 @@ $(shell mkdir -p $(TARGET_OUT_ETC)/firmware/wlan/prima; \
     $(TARGET_OUT_ETC)/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin; \
     ln -sf /data/misc/wifi/WCNSS_qcom_cfg.ini \
     $(TARGET_OUT_ETC)/firmware/wlan/prima/WCNSS_qcom_cfg.ini)
-
-$(shell mkdir -p $(PRODUCT_OUT)/system/vendor/lib/egl \
-    && pushd $(PRODUCT_OUT)/system/vendor/lib > /dev/null \
-    && ln -s egl/libEGL_adreno.so libEGL_adreno.so \
-    && popd > /dev/null)
 
 endif
