@@ -1,4 +1,10 @@
-# For compass calibration module
-allow system_server compass_prop:property_service set;
-
-allow system_server wifi_data_file:sock_file unlink;
+allow system_server efs_file:dir search;
+allow system_server sensors_efs_file:file r_file_perms;
+allow system_server sysfs_display:file rw_file_perms;
+allow system_server sysfs_sec:dir search;
+allow system_server sysfs_sec:file rw_file_perms;
+allow system_server sysfs_vibeamp:dir search;
+allow system_server sysfs_vibeamp:file rw_file_perms;
+allow system_server wifi_efs_file:dir search;
+allow system_server wifi_efs_file:file r_file_perms;
+allow system_server app_data_file:file rename;
