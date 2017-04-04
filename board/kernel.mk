@@ -1,5 +1,6 @@
 #TARGET_PREBUILT_KERNEL := device/samsung/a3ltexx/kernel
-KERNEL_TOOLCHAIN_PREFIX := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-
+#KERNEL_TOOLCHAIN_PREFIX := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-
+KERNEL_TOOLCHAIN_PREFIX := $(ANDROID_BUILD_TOP)/gcc-linaro-4.9.4-201701/bin/arm-eabi-
 #TARGET_GCC_VERSION_EXP := 4.8
 TARGET_KERNEL_ARCH := arm
 #BOARD_DTBTOOL_ARG := -2
