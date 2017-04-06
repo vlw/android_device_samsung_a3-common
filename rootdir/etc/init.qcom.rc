@@ -87,6 +87,10 @@ on early-boot
     write /sys/kernel/boot_adsp/boot 1
     setprop qcom.audio.init complete
 
+on property:sys.boot_completed=1
+    start post-boot
+    start qti-testscripts
+
 on boot
     # Set per_process_reclaim tuning parameters
     write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
@@ -573,6 +577,12 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
     mkdir /data/diag_logs 0777 system system 5
+
+service post-boot /system/bin/sh /init.start.sh
+    user root
+    seclabel u:r:su:s0
+    oneshot
+    disabled
 
 service netmgrd /system/bin/netmgrd
     class main
