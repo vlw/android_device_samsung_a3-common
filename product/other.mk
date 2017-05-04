@@ -14,3 +14,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # FlipFlap
 PRODUCT_PACKAGES += \
     FlipFlap
+
+# WeatherManager
+PRODUCT_PACKAGES += \
+    WeatherManagerService
