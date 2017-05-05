@@ -1,0 +1,1 @@
+allow bluetooth_loader bluetooth_loader:capability { fsetid dac_override };

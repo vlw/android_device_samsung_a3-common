@@ -1,0 +1,5 @@
+allow sysinit rootfs:file rx_file_perms;
+allow sysinit sysfs_lowmemorykiller:file rw_file_perms;
+allow sysinit proc:file rw_file_perms;
+allow sysinit proc_dirty_ratio:file rw_file_perms;
+allow sysinit proc_meminfo:file rw_file_perms;
