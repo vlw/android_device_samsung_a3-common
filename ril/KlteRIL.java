@@ -26,12 +26,15 @@ import android.os.Parcel;
 import android.os.SystemProperties;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SignalStrength;
+import android.media.AudioManager;
+
 import com.android.internal.telephony.cdma.CdmaInformationRecords;
 import com.android.internal.telephony.cdma.CdmaInformationRecords.CdmaSignalInfoRec;
 import com.android.internal.telephony.cdma.SignalToneUtil;
 import com.android.internal.telephony.uicc.IccCardApplicationStatus;
 import com.android.internal.telephony.uicc.IccCardStatus;
 import com.android.internal.telephony.uicc.IccUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -43,18 +46,27 @@ import java.util.Collections;
 public class KlteRIL extends RIL {
 
     private static final int RIL_UNSOL_ON_SS_LL = 11055;
+    private static final int RIL_UNSOL_RESPONSE_IMS_NETWORK_STATE_CHANGED = 1037;
+    private static final int RIL_UNSOL_DEVICE_READY_NOTI = 11008;
+    private static final int RIL_UNSOL_AM = 11010;
+    private static final int RIL_UNSOL_WB_AMR_STATE = 11017;
+    private static final int RIL_UNSOL_RESPONSE_HANDOVER = 11021;
+
+    private AudioManager mAudioManager;
 
     private boolean mIsGsm = false;
 
     public KlteRIL(Context context, int networkMode, int cdmaSubscription) {
         super(context, networkMode, cdmaSubscription, null);
         mQANElements = 6;
+        mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
     public KlteRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
         mQANElements = 6;
+        mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
     @Override
@@ -116,6 +128,7 @@ public class KlteRIL extends RIL {
             appStatus.pin1_replaced  = p.readInt();
             appStatus.pin1           = appStatus.PinStateFromRILInt(p.readInt());
             appStatus.pin2           = appStatus.PinStateFromRILInt(p.readInt());
+            // All subsequent readInt()s added for our device
             p.readInt(); // pin1_num_retries
             p.readInt(); // puk1_num_retries
             p.readInt(); // pin2_num_retries
@@ -295,13 +308,55 @@ public class KlteRIL extends RIL {
             case RIL_UNSOL_ON_SS_LL:
                 newResponse = RIL_UNSOL_ON_SS;
                 break;
+            case RIL_UNSOL_RESPONSE_IMS_NETWORK_STATE_CHANGED:
+                ret = responseVoid(p);
+                break;
+            case RIL_UNSOL_DEVICE_READY_NOTI:
+                ret = responseVoid(p);
+                break;
+            case RIL_UNSOL_AM:
+                ret = responseString(p);
+                break;
+            case RIL_UNSOL_WB_AMR_STATE:
+                ret = responseInts(p);
+                setWbAmr(((int[])ret)[0]);
+                break;
+            case RIL_UNSOL_RESPONSE_HANDOVER:
+                ret = responseVoid(p);
+                break;
+            case 1040:
+                newResponse = RIL_UNSOL_ON_SS;
+                break;
+            case 1041:
+                newResponse = RIL_UNSOL_STK_CC_ALPHA_NOTIFY;
+                break;
+            case 11031:
+                newResponse = RIL_UNSOL_UICC_SUBSCRIPTION_STATUS_CHANGED;
+                break;
         }
-        if (newResponse != response) {
-            p.setDataPosition(dataPosition);
-            p.writeInt(newResponse);
-        }
-        p.setDataPosition(dataPosition);
-        super.processUnsolicited(p, type);
+        switch (response) {
+              case RIL_UNSOL_AM:
+                samsungUnsljLogRet(response, ret);
+                String amString = (String) ret;
+                Rlog.d(RILJ_LOG_TAG, "Executing AM: " + amString);
+
+                try {
+                    Runtime.getRuntime().exec("am " + amString);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Rlog.e(RILJ_LOG_TAG, "am " + amString + " could not be executed.");
+                }
+                break;
+
+			default:
+		        if (newResponse != response) {
+		              p.setDataPosition(dataPosition);
+		              p.writeInt(newResponse);
+		        }
+			    p.setDataPosition(dataPosition);
+				super.processUnsolicited(p, type);
+				return;
+		}
     }
 
     @Override
@@ -389,5 +444,33 @@ public class KlteRIL extends RIL {
             response[3] = "2";
         }
         return response;
+    }
+
+    private void setWbAmr(int state) {
+        if (state == 1) {
+            Rlog.d(RILJ_LOG_TAG, "setWbAmr(): setting audio parameter - wb_amr=on");
+            mAudioManager.setParameters("wb_amr=on");
+        }else if (state == 0) {
+            Rlog.d(RILJ_LOG_TAG, "setWbAmr(): setting audio parameter - wb_amr=off");
+            mAudioManager.setParameters("wb_amr=off");
+        }
+    }
+
+    protected Object
+    responseFailCause(Parcel p) {
+        int numInts;
+        int response[];
+
+        numInts = p.readInt();
+        response = new int[numInts];
+        for (int i = 0 ; i < numInts ; i++) {
+            response[i] = p.readInt();
+        }
+        LastCallFailCause failCause = new LastCallFailCause();
+        failCause.causeCode = response[0];
+        if (p.dataAvail() > 0) {
+          failCause.vendorCause = p.readString();
+        }
+        return failCause;
     }
 }
