@@ -254,6 +254,16 @@ public class KlteRIL extends RIL {
         return response;
     }
 
+    static String
+    samsungResponseToString(int request)
+    {
+        switch(request) {
+            // SAMSUNG STATES
+            case RIL_UNSOL_AM: return "RIL_UNSOL_AM";
+            default: return "<unknown response: "+request+">";
+        }
+    }
+
     protected void samsungUnsljLogRet(int response, Object ret) {
         riljLog("[UNSL]< " + samsungResponseToString(response) + " " + retToString(response, ret));
     }
