@@ -19,7 +19,7 @@
     <integer name="call_recording_audio_source">0</integer>
 
     <!-- Flag indicating if dtmf tone type is enabled -->
-    <bool name="dtmf_type_enabled">true</bool>
+    <bool name="dtmf_type_enabled">false</bool>
 	
 	<!-- This device implements a noise suppression device for in call audio-->
     <bool name="has_in_call_noise_suppression">true</bool>
