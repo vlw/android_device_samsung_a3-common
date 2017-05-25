@@ -35,8 +35,12 @@ import com.android.internal.telephony.uicc.IccCardApplicationStatus;
 import com.android.internal.telephony.uicc.IccCardStatus;
 import com.android.internal.telephony.uicc.IccUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Random;
 
 /**
  * RIL customization for Galaxy S5 (GSM) LTE devices
@@ -248,6 +252,10 @@ public class KlteRIL extends RIL {
         }
 
         return response;
+    }
+
+    protected void samsungUnsljLogRet(int response, Object ret) {
+        riljLog("[UNSL]< " + samsungResponseToString(response) + " " + retToString(response, ret));
     }
 
     @Override
