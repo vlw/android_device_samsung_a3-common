@@ -317,7 +317,7 @@ public class KlteRIL extends RIL {
     @Override
     protected void
     processUnsolicited (Parcel p, int type) {
-        Object ret;
+        Object ret = null;
         int dataPosition = p.dataPosition();
         int response = p.readInt();
         int newResponse = response;
