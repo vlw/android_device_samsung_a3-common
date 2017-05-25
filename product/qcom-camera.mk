@@ -14,5 +14,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.tn.disable=1 \
     persist.camera.pip.support=0 \
     persist.camera.hal.debug.mask=0 \
+    persist.ts.postmakeup=true \
+    persist.ts.rtmakeup=true \
     media.stagefright.legacyencoder=true \
     media.stagefright.less-secure=true
