@@ -31,9 +31,7 @@ import java.io.File;
 
 public class KeyDisabler {
 
-    private static String CONTROL_PATH = "/sys/class/input/input2/enabled";
-
-    private static String CONTROL_PATH_CONTROL = "/sys/class/sec/sec_touchkey/force_disable";
+    private static String CONTROL_PATH = "/sys/class/sec/sec_touchkey/enabled";
 
     public static boolean isSupported() {
         return new File(CONTROL_PATH).exists();
@@ -44,8 +42,7 @@ public class KeyDisabler {
     }
 
     public static boolean setActive(boolean state) {
-        return FileUtils.writeLine(CONTROL_PATH, (state ? "0" : "1"))
-                && FileUtils.writeLine(CONTROL_PATH_CONTROL, (state ? "0" : "1"));
+        return FileUtils.writeLine(CONTROL_PATH, (state ? "0" : "1"));
     }
 
 }
