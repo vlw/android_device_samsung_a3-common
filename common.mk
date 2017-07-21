@@ -15,7 +15,9 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Also get non-open-source specific aspects if available
-$(call inherit-product-if-exists, vendor/samsung/a3ltexx/a3-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/a3-common/a3-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/msm8916-common/msm8916-common-vendor.mk)
+
 
 # Common overlay
 DEVICE_PACKAGE_OVERLAYS += device/samsung/a3-common/overlay
