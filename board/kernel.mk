@@ -1,4 +1,5 @@
-#TARGET_PREBUILT_KERNEL := device/samsung/a3ltexx/kernel
+TARGET_KERNEL_CONFIG := msm8916_sec_defconfig 
+TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 #KERNEL_TOOLCHAIN_PREFIX := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-
 KERNEL_TOOLCHAIN_PREFIX := $(ANDROID_BUILD_TOP)/gcc-linaro_4.8.4-2014.114/bin/arm-eabi-
 #KERNEL_TOOLCHAIN_PREFIX := $(ANDROID_BUILD_TOP)/gcc-linaro-4.9.4-201701/bin/arm-eabi-
@@ -13,6 +14,6 @@ BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/samsung/msm8916
-BOARD_MKBOOTIMG_ARGS := --dt device/samsung/a3ltexx/dt.img --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
