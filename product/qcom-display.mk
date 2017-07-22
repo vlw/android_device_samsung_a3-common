@@ -1,6 +1,5 @@
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=240 \
     debug.composition.type=c2d \
     debug.sf.gpu_comp_tiling=1 \
     debug.mdpcomp.idletime=600 \
