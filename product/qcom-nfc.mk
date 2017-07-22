@@ -1,3 +1,5 @@
+ifneq ($(TARGET_DEVICE),a33g)
+
 # Property
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.nfc.sec_hal=true
@@ -20,3 +22,5 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/libnfc-sec.conf:system/etc/libnfc-brcm.conf \
     $(LOCAL_PATH)/nfc/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
     $(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
+
+endif
