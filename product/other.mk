@@ -1,7 +1,6 @@
 # Misc
 PRODUCT_PACKAGES += \
-    busybox \
-    su
+    busybox
 
 # WeatherManager
 PRODUCT_PACKAGES += \
