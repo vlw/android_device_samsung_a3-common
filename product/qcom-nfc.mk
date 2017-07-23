@@ -14,7 +14,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libnfc_nci \
 	libnfc_nci_jni \
-	libpn547_fw \
     NfcNci \
     Tag \
 	com.android.nfc.helper \
