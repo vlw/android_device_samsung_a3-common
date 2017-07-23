@@ -1,5 +1,0 @@
-# These are safe for an untrusted_app -- they are the external SD card
-allow untrusted_app fuseblk:dir search;
-allow untrusted_app fuseblk:file { getattr read };
-
-allow untrusted_app cm_status_bar_service:service_manager find;

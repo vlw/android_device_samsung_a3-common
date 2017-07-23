@@ -1,1 +1,0 @@
-allow wcnss_service efs_file:file rw_file_perms;

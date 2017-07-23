@@ -13,11 +13,23 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# inherit from qcom-common
-include device/samsung/msm8916-common/BoardConfigCommon.mk
+# Inherit from common
+$(call inherit-product, device/samsung/msm8916-common/msm8916.mk)
+
+# Also get non-open-source specific aspects if available
+$(call inherit-product-if-exists, vendor/samsung/a3-common/a3-common-vendor.mk)
 
 LOCAL_PATH := device/samsung/a3-common
 
-# Include board config fragments
-include device/samsung/a3-common/board/*.mk
+# Common overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/a3-common/overlay
+
+# Include package config fragments
+include $(LOCAL_PATH)/product/*.mk
+
+# append the updater uri to the product properties if set
+ifneq ($(CM_UPDATER_OTA_URI),)
+	PRODUCT_PROPERTY_OVERRIDES += $(CM_UPDATER_OTA_URI)
+endif

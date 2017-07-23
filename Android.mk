@@ -1,4 +1,4 @@
-# Copyright (C) 2015 The Android Open-Source Project
+# Copyright (C) 2017 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-SAMSUNG_TARGETS := a3ltexx a3ultexx a33gxx
+SAMSUNG_TARGETS := a3lte a3ulte a33g
 
 ifneq ($(filter $(SAMSUNG_TARGETS),$(TARGET_DEVICE)),)
 include $(call all-makefiles-under,$(LOCAL_PATH))
@@ -297,5 +297,22 @@ $(shell mkdir -p $(TARGET_OUT_ETC)/firmware/wcd9306; \
     $(TARGET_OUT_ETC)/firmware/wcd9306/wcd9306_anc.bin; \
     ln -sf /data/misc/audio/mbhc.bin \
     $(TARGET_OUT_ETC)/firmware/wcd9306/wcd9306_mbhc.bin)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := RemovePackages
+LOCAL_MODULE_TAGS := optional
+LOCAL_CERTIFICATE := shared
+LOCAL_MODULE_CLASS := FAKE
+# It overrrides packages to avoid their addition to the ROM
+LOCAL_OVERRIDES_PACKAGES := \
+	libsecril-client \
+	librilutils \
+	libreference-ril \
+	libril \
+	libtinyalsa \
+	libaudioroute \
+	rild
+
+include $(BUILD_PHONY_PACKAGE)
 
 endif
