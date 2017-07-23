@@ -103,7 +103,17 @@ vendor/lib/libqmi_csi.so
 vendor/lib/libqmi_encdec.so
 vendor/lib/libqmiservices.so
 
+# Audio ACDBs
+etc/Bluetooth_cal.acdb
+etc/General_cal.acdb
+etc/Global_cal.acdb
+etc/Handset_cal.acdb
+etc/Hdmi_cal.acdb
+etc/Headset_cal.acdb
+etc/Speaker_cal.acdb
+
 # Audio
+etc/Tfa9895.cnt
 lib/hw/audio.primary.msm8916.so
 lib/soundfx/libaudiosa_sec.so
 lib/soundfx/libaudioeffectoffload.so
