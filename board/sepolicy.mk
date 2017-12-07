@@ -1,6 +1,4 @@
-#!/bin/bash
 #
-# Copyright (C) 2016 The CyanogenMod Project
 # Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,20 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-set -e
-
-# Required!
-export DEVICES="a3lte a33g a3ulte"
-export DEVICE_COMMON=a3-common
-export BOARD_COMMON=msm8916-common
-export VENDOR=samsung
-
-if [ -z "$SETUP_DEVICE_COMMON_DIR" ]; then
-	export SETUP_DEVICE_COMMON_DIR=1
-fi
-if [ -z "$SETUP_BOARD_COMMON_DIR" ]; then
-	export SETUP_BOARD_COMMON_DIR=0
-fi
-
-./../../$VENDOR/$BOARD_COMMON/setup-makefiles.sh $@
+# SELinux
+BOARD_SEPOLICY_DIRS += \
+    $(LOCAL_PATH)/sepolicy

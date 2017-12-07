@@ -42,21 +42,4 @@ $(shell mkdir -p $(TARGET_OUT_ETC)/firmware/wcd9306; \
     ln -sf /data/misc/audio/mbhc.bin \
     $(TARGET_OUT_ETC)/firmware/wcd9306/wcd9306_mbhc.bin)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := RemovePackages
-LOCAL_MODULE_TAGS := optional
-LOCAL_CERTIFICATE := shared
-LOCAL_MODULE_CLASS := FAKE
-# It overrrides packages to avoid their addition to the ROM
-LOCAL_OVERRIDES_PACKAGES := \
-	libsecril-client \
-	librilutils \
-	libreference-ril \
-	libril \
-	libtinyalsa \
-	libaudioroute \
-	rild
-
-include $(BUILD_PHONY_PACKAGE)
-
 endif
