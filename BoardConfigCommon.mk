@@ -14,6 +14,7 @@
 # limitations under the License.
 
 PLATFORM_PATH := device/samsung/a3-common
+LOCAL_PATH := device/samsung/a3-common
 
 # Includes
 TARGET_SPECIFIC_HEADER_PATH := $(PLATFORM_PATH)/include
