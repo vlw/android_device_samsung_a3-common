@@ -6,7 +6,7 @@ endif
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_SUPPRESS_SECURE_ERASE := true
 BOARD_USE_CUSTOM_RECOVERY_FONT 	    := \"roboto_23x41.h\"
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/msm8916-common/recovery/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/a3-common/recovery/recovery_keys.c
 BOARD_HAS_NO_MISC_PARTITION 		:= true
 BOARD_RECOVERY_SWIPE 				:= true
 BOARD_USES_MMCUTILS 				:= true
@@ -32,7 +32,7 @@ TW_TARGET_USES_QCOM_BSP := false
 TW_THEME := portrait_hdpi
 TW_INCLUDE_NTFS_3G := true
 
-TARGET_RECOVERY_FSTAB := device/samsung/msm8916-common/recovery/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/samsung/a3-common/recovery/recovery.fstab
 
 ifeq ($(RECOVERY_VARIANT),twrp)
 	BOARD_GLOBAL_CFLAGS += -DTW_USE_MINUI_CUSTOM_FONTS
