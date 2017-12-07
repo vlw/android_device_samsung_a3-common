@@ -14,5 +14,8 @@
 # limitations under the License.
 #
 # SELinux
+-include device/qcom/sepolicy/sepolicy.mk
+
 BOARD_SEPOLICY_DIRS += \
-    $(LOCAL_PATH)/sepolicy
+    $(LOCAL_PATH)/sepolicy \
+    $(PLATFORM_PATH)/sepolicy
