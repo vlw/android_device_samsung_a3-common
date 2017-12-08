@@ -1,3 +1,5 @@
 # Other
 PRODUCT_PACKAGES += \
-	libstlport
+	libstlport \
+    su \
+    busybox
