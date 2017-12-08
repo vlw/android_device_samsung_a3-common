@@ -29,9 +29,10 @@
 
 #include <stdlib.h>
 #include <cutils/properties.h>
-#include <fstream>
-#include <iostream>
-#include <string>
+#include <stdio.h>
+#include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
@@ -39,22 +40,44 @@
 #include "util.h"
 
 #define ISMATCH(a,b)    (!strncmp(a,b,PROP_VALUE_MAX))
+#define SIMSLOT_FILE "/proc/simslot_count"
+
+using namespace std;
+
+/* Read the file at filename and returns the integer
+ * value in the file.
+ *
+ * @prereq: Assumes that integer is non-negative.
+ *
+ * @return: integer value read if succesful, -1 otherwise. */
+int read_integer(const char* filename)
+{
+	int retval;
+	FILE * file;
+
+	/* open the file */
+	if (!(file = fopen(filename, "r"))) {
+		return -1;
+	}
+	/* read the value from the file */
+	fscanf(file, "%d", &retval);
+	fclose(file);
+
+	return retval;
+}
 
 void init_dsds() {
     property_set("ro.multisim.set_audio_params", "true");
     property_set("ro.multisim.simslotcount", "2");
     property_set("persist.radio.multisim.config", "dsds");
+    property_set("ro.telephony.ril.config", "simactivation");
+    property_set("rild.libpath2", "/system/lib/libsec-ril-dsds.so");
 }
 
 void init_ss() {
     property_set("ro.multisim.set_audio_params", "false");
     property_set("ro.multisim.simslotcount", "1");
     property_set("persist.radio.multisim.config", "ss");
-}
-
-bool FileExists(const std::string& path)
-{
-        return std::ifstream(path.c_str()).good();
 }
 
 void vendor_load_properties()
@@ -122,36 +145,20 @@ void vendor_load_properties()
         property_set("ro.product.device", "a3lte");
     }
 
-	int curlang;
-	curlang = property_get("ro.product.locale", platform, ""); 
-	if (!curlang) {	
-		if (FileExists("system/loader/rus.lang")) {
-		property_set("ro.product.locale", "ru-RU");
-		} else {
-		property_set("ro.product.locale", "en-US");
-		}
-	}
-
 		INFO("INIT: sim_count detecting");
-		std::ifstream fin("proc/simslot_count");
-		char buff[10];
 
-		if (fin.is_open())
-		{
-			fin >> buff;
-			fin.close();
+	/* check for multi-sim devices */
 
-			if (strstr(buff,"2")) {
-			//property_set("ro.product.model", "SM-A300F2");
+	/* check if the simslot count file exists */
+	if (access(SIMSLOT_FILE, F_OK) == 0) {
+		int sim_count= read_integer(SIMSLOT_FILE);
+
+		/* set the dual sim props */
+		if (sim_count == 2)
 			init_dsds();
-			} else {
-			//property_set("ro.product.model", "SM-A300F1");
-			init_ss();
-			}
-		} else {
-		//property_set("ro.product.model", "SM-A300F0");
-		init_ss();
-		}
+        else
+            init_ss();
+	}
 
     property_get("ro.product.device", device, "A300?");
     strlcpy(devicename, device, sizeof(devicename));
