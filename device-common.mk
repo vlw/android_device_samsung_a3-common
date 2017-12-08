@@ -19,7 +19,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, device/samsung/a3-common/msm8916.mk)
 
 # Also get non-open-source specific aspects if available
-$(call inherit-product-if-exists, vendor/samsung/a3ltexx/a3ltexx-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/a3-common/a3-vendor.mk)
 
 LOCAL_PATH := device/samsung/a3-common
 
